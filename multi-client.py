@@ -44,7 +44,7 @@ def service_connection(key, mask):
     sock = key.fileobj
     data = key.data
     if mask & selectors.EVENT_READ:
-        recv_data = sock.recv(1024)  # Should be ready to read
+        recv_data = sock.recv(1024)  
         if recv_data:
             print("received", repr(recv_data), "from connection", data.connid)
             data.recv_total += len(recv_data)
@@ -57,11 +57,10 @@ def service_connection(key, mask):
             data.outb = data.messages.pop(0)
         if data.outb:
             print("sending", repr(data.outb), "to connection", data.connid)
-            sent = sock.send(data.outb)  # Should be ready to write
+            sent = sock.send(data.outb)  
             data.outb = data.outb[sent:]
 
 
-#Get console arguments
 if len(sys.argv) != 4:
     print("usage:", sys.argv[0], "<host> <port> <num_connections>")
     sys.exit(1)
@@ -75,6 +74,5 @@ while True:
     if events:
         for key, mask in events:
             service_connection(key, mask)
-    # Check for a socket being monitored to continue.
     if not selector.get_map():
         break
