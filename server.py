@@ -17,9 +17,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.listen()  # Enables the server to receive connnections
     connection, address = s.accept()
     with connection:
-        print("%s has successfully connected" % address)
+        print("A connection has been made successfully")
         while True:
-            data = connection.recv(1024)
+            data = connection.recv(1024)#Maximum amount of data to be received at a time(Buffer)
             if not data:
                 break
             connection.sendall(data)#Echos the data received
