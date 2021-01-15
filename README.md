@@ -1,1 +1,1 @@
-# py-sockets
+# py-socket
